@@ -58,15 +58,18 @@ function App() {
       const profileObj = credential ? parseJwt(credential) : null;
 
       if (profileObj) {
-        const response = await fetch("http://localhost:8080/api/v1/users", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: profileObj.name,
-            email: profileObj.email,
-            avatar: profileObj.picture,
-          }),
-        });
+        const response = await fetch(
+          "https://properties-mern.onrender.com/api/v1/users",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: profileObj.name,
+              email: profileObj.email,
+              avatar: profileObj.picture,
+            }),
+          }
+        );
 
         const data = await response.json();
         if (response.status === 200) {
@@ -126,7 +129,9 @@ function App() {
       <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
       <RefineSnackbarProvider>
         <Refine
-          dataProvider={dataProvider("http://localhost:8080/api/v1")}
+          dataProvider={dataProvider(
+            "https://properties-mern.onrender.com/api/v1"
+          )}
           notificationProvider={notificationProvider}
           ReadyPage={ReadyPage}
           catchAll={<ErrorComponent />}
@@ -145,16 +150,16 @@ function App() {
               show: AgentProfile,
               icon: <PeopleAltOutlined />,
             },
-            {
-              name: "reviews",
-              list: Home,
-              icon: <StartOutlined />,
-            },
-            {
-              name: "messages",
-              list: Home,
-              icon: <ChatBubbleOutline />,
-            },
+            // {
+            //   name: "reviews",
+            //   list: Home,
+            //   icon: <StartOutlined />,
+            // },
+            // {
+            //   name: "messages",
+            //   list: Home,
+            //   icon: <ChatBubbleOutline />,
+            // },
             {
               name: "my-profile",
               options: { label: "My Profile" },
